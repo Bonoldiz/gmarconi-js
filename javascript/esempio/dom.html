@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+    <!-- STILI -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+</head>
+
+<body class="container">
+    <!-- 
+        Posso manipolare gli elementi della pagina attraverso il DOM
+        cioè la rappresentazione (ad albero) del contenuto della pagina
+    -->
+    <h1 id="mioHeader">
+        Sono un header :)
+    </h1>
+    <hr>
+    <div id="mioDivisore">
+        <p id="primo" class="paragrafi">primo paragrafo</p>
+        <p id="secondo" class="paragrafi">secondo paragrafo</p>
+    </div>
+    <hr>
+    <h2 id="cambioColore">Cambio coloreee</h2>
+    <!-- 
+        Con l'attributo onclick indico che qual'ora ci sia un click sul bottom dovra essere eseguito 
+        il pezzo di codice definito nella funzione 'cambioColore'
+    -->
+    <button type="button" onclick="cambioColore()" class="btn btn-success">Cambia colore!</button>
+
+    <script type="text/javascript">
+        // Posso inserire il mio codice direttamente nel documento html
+        // verrà eseguito non appena il documento viene caricato (attenzione non si attende il DOM ma solo il documento)
+        var header = document.getElementById('mioHeader');
+
+        // Se stampo in console un HTMLElement mi verrà proposto una visualizzazione
+        // simile a quella del dom
+        console.log("Header (documento) :", header);
+        // mentre con console.dir mi viene mostrato il DOM
+        console.log("Header (DOM) : ");
+        console.dir(header);
+
+        // Cosi facendo altero il contenuto del elemento
+        header.textContent = "Sono il nuovo header!";
+
+        // Posso accedere anche gli elementi "figli"
+        var divisore = document.getElementById("mioDivisore");
+        console.dir("Divisore :", divisore.children);
+
+        // Oppure ottenere tutti i nodi figli
+        // 
+        // NB. in questo caso ottengo TUTTO il contenuto del mio elemento
+        // infatti non tutto è un HTMLElement ma si ha anche a che fare con Nodi 
+        console.dir(divisore.children);
+        console.dir(divisore.childNodes);
+
+        // Passiamo a cose un po più carine
+        var elementoCambioColore = document.getElementById('cambioColore');
+
+        // Posso definire cosi una funzione
+        // nel nostro caso cambia il colore del testo di un  elemento
+        // aggiunge una classe di bootstrap e ne rimuove un altra per 
+        // ottenere l'effetto del cambio colore 
+        function cambioColore() {
+            if (
+                elementoCambioColore.classList.contains("text-danger")
+            ) {
+                elementoCambioColore.classList.remove(["text-danger"]);
+                elementoCambioColore.classList.add(["text-success"]);
+            } else {
+                elementoCambioColore.classList.add(["text-danger"]);
+                elementoCambioColore.classList.remove(["text-success"]);
+            }
+        }
+
+        // Qui uso la funzione setInterval per richiamare la funzione cambio colore
+        // ogni 1000 millisecondi = 1 secondo
+        setInterval(cambioColore, 1000);
+    </script>
+</body>
+
+</html>
