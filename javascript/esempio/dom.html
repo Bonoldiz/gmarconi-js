@@ -29,7 +29,7 @@
         Con l'attributo onclick indico che qual'ora ci sia un click sul bottom dovra essere eseguito 
         il pezzo di codice definito nella funzione 'cambioColore'
     -->
-    <button type="button" onclick="cambioColore()" class="btn btn-success">Cambia colore!</button>
+    <button type="button" id="bottoneCambioColore" onclick="cambioColore()" class="btn btn-success">Cambia colore!</button>
 
     <script type="text/javascript">
         // Posso inserire il mio codice direttamente nel documento html
@@ -57,8 +57,18 @@
         console.dir(divisore.children);
         console.dir(divisore.childNodes);
 
+
+
         // Passiamo a cose un po più carine
         var elementoCambioColore = document.getElementById('cambioColore');
+
+        // Posso quidi aggiungere un listener al botton
+        document.getElementById("bottoneCambioColore").addEventListener(
+            "click",
+            (event) => {
+                console.log("Sono stato cliccato!");
+            }
+        )
 
         // Posso definire cosi una funzione
         // nel nostro caso cambia il colore del testo di un  elemento
